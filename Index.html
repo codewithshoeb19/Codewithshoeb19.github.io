@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haven & Home Realty | Your Trusted Broker</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand:     #F5EFE6;
+    --clay:     #C4846A;
+    --bark:     #3B2F2F;
+    --stone:    #8C7B72;
+    --cream:    #FBF8F4;
+    --leaf:     #5A7A5C;
+    --white:    #FFFFFF;
+
+    --display:  'Cormorant Garamond', Georgia, serif;
+    --body:     'Inter', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    background: var(--cream);
+    color: var(--bark);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--cream);
+    border-bottom: 1px solid rgba(196,132,106,0.2);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1.4rem; font-weight: 600;
+    color: var(--bark);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--clay); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500;
+    color: var(--stone); text-decoration: none;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--clay); }
+  .nav-cta {
+    background: var(--clay); color: var(--white);
+    padding: 0.55rem 1.3rem; border-radius: 4px;
+    font-size: 0.82rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.05em;
+    text-transform: uppercase; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--bark); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 88vh;
+    background: linear-gradient(135deg, #3B2F2F 0%, #5A3E38 55%, #C4846A 100%);
+    display: flex; align-items: center;
+    padding: 0 8%;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-content { position: relative; max-width: 600px; }
+  .hero-eyebrow {
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 500; line-height: 1.12;
+    color: var(--white); margin-bottom: 1.4rem;
+  }
+  .hero h1 em { font-style: italic; color: #E8B89D; }
+  .hero-sub {
+    font-size: 1.05rem; font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    max-width: 440px; margin-bottom: 2.4rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--clay); color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    font-size: 0.88rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.05em;
+    text-transform: uppercase; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #B5735A; }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    font-size: 0.88rem; font-weight: 500;
+    text-decoration: none; letter-spacing: 0.05em;
+    text-transform: uppercase; transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+  /* stats bar */
+  .stats-bar {
+    background: var(--white);
+    border-bottom: 1px solid rgba(196,132,106,0.15);
+    padding: 1.6rem 8%;
+    display: flex; gap: 3rem; flex-wrap: wrap;
+  }
+  .stat { display: flex; flex-direction: column; }
+  .stat-num {
+    font-family: var(--display);
+    font-size: 2rem; font-weight: 600;
+    color: var(--clay); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.75rem; font-weight: 500;
+    color: var(--stone); letter-spacing: 0.06em;
+    text-transform: uppercase; margin-top: 0.3rem;
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 5rem 8%; }
+  .section-eyebrow {
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 0.7rem;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(1.9rem, 3vw, 2.7rem);
+    font-weight: 500; line-height: 1.2;
+    color: var(--bark); margin-bottom: 0.6rem;
+  }
+  .section-sub {
+    font-size: 0.95rem; color: var(--stone);
+    max-width: 480px; margin-bottom: 2.8rem;
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    display: flex; gap: 0.6rem; flex-wrap: wrap;
+    margin-bottom: 2.4rem;
+  }
+  .filter-btn {
+    padding: 0.45rem 1.1rem; border-radius: 20px;
+    font-size: 0.8rem; font-weight: 500;
+    border: 1.5px solid rgba(196,132,106,0.35);
+    background: transparent; color: var(--stone);
+    cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--clay); border-color: var(--clay);
+    color: var(--white);
+  }
+
+  /* ── LISTING GRID ── */
+  #listings { background: var(--sand); }
+  .listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.6rem;
+  }
+  .card {
+    background: var(--white); border-radius: 10px;
+    overflow: hidden; box-shadow: 0 2px 12px rgba(59,47,47,0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(59,47,47,0.13); }
+  .card-img {
+    width: 100%; height: 200px; object-fit: cover;
+    background: var(--stone);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: rgba(255,255,255,0.5);
+  }
+  .card-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--clay); color: var(--white);
+    font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; border-radius: 3px;
+  }
+  .card-wrap { position: relative; }
+  .card-body { padding: 1.3rem; }
+  .card-price {
+    font-family: var(--display);
+    font-size: 1.5rem; font-weight: 600;
+    color: var(--clay); margin-bottom: 0.3rem;
+  }
+  .card-address {
+    font-size: 0.9rem; font-weight: 500;
+    color: var(--bark); margin-bottom: 0.25rem;
+  }
+  .card-type {
+    font-size: 0.75rem; color: var(--stone);
+    text-transform: uppercase; letter-spacing: 0.07em;
+    margin-bottom: 1rem;
+  }
+  .card-specs {
+    display: flex; gap: 1rem;
+    font-size: 0.8rem; color: var(--stone);
+    border-top: 1px solid var(--sand);
+    padding-top: 0.9rem;
+  }
+  .card-spec { display: flex; align-items: center; gap: 0.3rem; }
+  .card-spec svg { width: 14px; height: 14px; opacity: 0.6; }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .about-photo {
+    width: 100%; aspect-ratio: 4/5; border-radius: 10px;
+    background: linear-gradient(160deg, #C4846A, #8C7B72);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem; color: rgba(255,255,255,0.4);
+    position: relative;
+  }
+  .about-photo::after {
+    content: '';
+    position: absolute; bottom: -16px; right: -16px;
+    width: 70%; height: 70%; border-radius: 10px;
+    border: 3px solid var(--clay); z-index: -1;
+  }
+  .about-quote {
+    font-family: var(--display);
+    font-size: 1.35rem; font-style: italic;
+    color: var(--bark); line-height: 1.5;
+    border-left: 3px solid var(--clay);
+    padding-left: 1.2rem; margin: 1.8rem 0;
+  }
+  .about-text { font-size: 0.95rem; color: var(--stone); margin-bottom: 1rem; }
+  .badge-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.6rem; }
+  .badge {
+    background: var(--sand); color: var(--bark);
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.4rem 0.9rem; border-radius: 20px;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--sand); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start;
+  }
+  .contact-info h3 {
+    font-family: var(--display);
+    font-size: 1.5rem; font-weight: 500;
+    color: var(--bark); margin-bottom: 1rem;
+  }
+  .contact-info p { font-size: 0.93rem; color: var(--stone); margin-bottom: 2rem; }
+  .contact-detail {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-size: 0.9rem; color: var(--bark);
+    margin-bottom: 1rem; font-weight: 500;
+  }
+  .contact-icon {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--clay); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg { width: 16px; height: 16px; fill: none; stroke: white; stroke-width: 2; }
+
+  .contact-form {
+    background: var(--white); padding: 2.4rem;
+    border-radius: 12px; box-shadow: 0 4px 20px rgba(59,47,47,0.08);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block; font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--stone); margin-bottom: 0.45rem;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1.5px solid rgba(140,123,114,0.3);
+    border-radius: 6px; font-family: var(--body);
+    font-size: 0.9rem; color: var(--bark);
+    background: var(--cream);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--clay);
+    box-shadow: 0 0 0 3px rgba(196,132,106,0.15);
+  }
+  .form-group textarea { height: 110px; resize: vertical; }
+  .form-submit {
+    width: 100%; padding: 0.95rem;
+    background: var(--clay); color: var(--white);
+    border: none; border-radius: 6px;
+    font-family: var(--body); font-size: 0.9rem;
+    font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase; cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.4rem;
+  }
+  .form-submit:hover { background: var(--bark); }
+  .form-success {
+    display: none; text-align: center; padding: 2rem;
+  }
+  .form-success .check {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--leaf); display: flex; align-items: center;
+    justify-content: center; margin: 0 auto 1rem;
+  }
+  .form-success .check svg { width: 24px; stroke: white; fill: none; stroke-width: 2.5; }
+  .form-success h4 { font-family: var(--display); font-size: 1.4rem; color: var(--bark); margin-bottom: 0.5rem; }
+  .form-success p { font-size: 0.9rem; color: var(--stone); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bark); color: rgba(255,255,255,0.6);
+    padding: 2.5rem 8%; font-size: 0.82rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer .logo { font-family: var(--display); font-size: 1.1rem; color: white; font-weight: 500; }
+  footer .logo span { color: var(--clay); }
+  footer a { color: rgba(255,255,255,0.5); text-decoration: none; }
+  footer a:hover { color: var(--clay); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #about { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .stats-bar { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Haven<span>&</span>Home</a>
+  <ul class="nav-links">
+    <li><a href="#listings">Listings</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Licensed Real Estate Broker</p>
+    <h1>Finding You a Place <em>Worth Coming Home To</em></h1>
+    <p class="hero-sub">Residential, commercial, or investment — I guide buyers, sellers, and investors through every step with honesty and care.</p>
+    <div class="hero-actions">
+      <a href="#listings" class="btn-primary">Browse Listings</a>
+      <a href="#contact" class="btn-outline">Talk to Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">14+</span><span class="stat-label">Years Experience</span></div>
+  <div class="stat"><span class="stat-num">320+</span><span class="stat-label">Properties Sold</span></div>
+  <div class="stat"><span class="stat-num">$180M+</span><span class="stat-label">In Transactions</span></div>
+  <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Client Satisfaction</span></div>
+</div>
+
+<!-- LISTINGS -->
+<section id="listings">
+  <p class="section-eyebrow">Current Listings</p>
+  <h2 class="section-title">Properties Available Now</h2>
+  <p class="section-sub">Residential, commercial, and investment properties across the region.</p>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCards(this,'all')">All Types</button>
+    <button class="filter-btn" onclick="filterCards(this,'residential')">Residential</button>
+    <button class="filter-btn" onclick="filterCards(this,'commercial')">Commercial</button>
+    <button class="filter-btn" onclick="filterCards(this,'investment')">Investment</button>
+  </div>
+
+  <div class="listing-grid" id="listingGrid">
+
+    <div class="card" data-type="residential">
+      <div class="card-wrap">
+        <div class="card-img" style="background:linear-gradient(135deg,#C4846A,#8C7B72);">🏡</div>
+        <span class="card-badge">For Sale</span>
+      </div>
+      <div class="card-body">
+        <div class="card-price">$649,000</div>
+        <div class="card-address">142 Maplewood Drive</div>
+        <div class="card-type">Residential · Single Family</div>
+        <div class="card-specs">
+          <span class="card-spec">🛏 4 Beds</span>
+          <span class="card-spec">🚿 3 Baths</span>
+          <span class="card-spec">📐 2,100 sqft</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-type="commercial">
+      <div class="card-wrap">
+        <div class="card-img" style="background:linear-gradient(135deg,#3B2F2F,#5A7A5C);">🏢</div>
+        <span class="card-badge">For Lease</span>
+      </div>
+      <div class="card-body">
+        <div class="card-price">$8,200/mo</div>
+        <div class="card-address">88 Commerce Blvd, Suite 3</div>
+        <div class="card-type">Commercial · Office Space</div>
+        <div class="card-specs">
+          <span class="card-spec">🚪 8 Offices</span>
+          <span class="card-spec">🅿️ 12 Parking</span>
+          <span class="card-spec">📐 3,400 sqft</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-type="investment">
+      <div class="card-wrap">
+        <div class="card-img" style="background:linear-gradient(135deg,#5A7A5C,#C4846A);">🏘</div>
+        <span class="card-badge">Investment</span>
+      </div>
+      <div class="card-body">
+        <div class="card-price">$1,250,000</div>
+        <div class="card-address">7-Unit Apartment on Elm St</div>
+        <div class="card-type">Investment · Multi-Family</div>
+        <div class="card-specs">
+          <span class="card-spec">🏠 7 Units</span>
+          <span class="card-spec">💰 6.8% Cap Rate</span>
+          <span class="card-spec">📐 5,800 sqft</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-type="residential">
+      <div class="card-wrap">
+        <div class="card-img" style="background:linear-gradient(135deg,#8C7B72,#3B2F2F);">🏠</div>
+        <span class="card-badge">New Price</span>
+      </div>
+      <div class="card-body">
+        <div class="card-price">$389,000</div>
+        <div class="card-address">25 Birchwood Lane</div>
+        <div class="card-type">Residential · Condo</div>
+        <div class="card-specs">
+          <span class="card-spec">🛏 2 Beds</span>
+          <span class="card-spec">🚿 2 Baths</span>
+          <span class="card-spec">📐 1,050 sqft</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-type="commercial">
+      <div class="card-wrap">
+        <div class="card-img" style="background:linear-gradient(135deg,#C4846A,#3B2F2F);">🏪</div>
+        <span class="card-badge">For Sale</span>
+      </div>
+      <div class="card-body">
+        <div class="card-price">$975,000</div>
+        <div class="card-address">310 Retail Row, Unit A</div>
+        <div class="card-type">Commercial · Retail / Storefront</div>
+        <div class="card-specs">
+          <span class="card-spec">🚪 Open Floor</span>
+          <span class="card-spec">🅿️ Strip Mall</span>
+          <span class="card-spec">📐 2,200 sqft</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-type="investment">
+      <div class="card-wrap">
+        <div class="card-img" style="background:linear-gradient(135deg,#5A3E38,#8C7B72);">🏗</div>
+        <span class="card-badge">Off-Market</span>
+      </div>
+      <div class="card-body">
+        <div class="card-price">$2,100,000</div>
+        <div class="card-address">Industrial Portfolio, East Side</div>
+        <div class="card-type">Investment · Industrial / Warehouse</div>
+        <div class="card-specs">
+          <span class="card-spec">🏭 3 Buildings</span>
+          <span class="card-spec">💰 7.2% Cap Rate</span>
+          <span class="card-spec">📐 18,000 sqft</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-photo">👤</div>
+  <div>
+    <p class="section-eyebrow">Meet Your Broker</p>
+    <h2 class="section-title">I'm Here to Make This Easy for You</h2>
+    <blockquote class="about-quote">"Real estate isn't just about buildings — it's about the life you're about to build inside them."</blockquote>
+    <p class="about-text">With over 14 years working across residential, commercial, and investment properties, I've learned that every client's situation is different — and deserves a personal approach, not a one-size-fits-all pitch.</p>
+    <p class="about-text">Whether you're a first-time buyer, selling a family home, or growing an investment portfolio, I'll be straight with you about the market, the process, and what to expect at every step.</p>
+    <div class="badge-row">
+      <span class="badge">Licensed Broker</span>
+      <span class="badge">Residential</span>
+      <span class="badge">Commercial</span>
+      <span class="badge">Investment</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-eyebrow">Let's Talk</p>
+  <h2 class="section-title">Ready to Take the Next Step?</h2>
+  <p class="section-sub">Send me a message and I'll get back to you within one business day — no pressure, no sales pitch.</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Reach Me Directly</h3>
+      <p>I personally respond to every inquiry. Let me know what you're looking for and we'll figure out the best path forward together.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.11 12a19.79 19.79 0 01-3.07-8.63A2 2 0 013.02 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        (555) 012-3456
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        hello@havenandHome.com
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        Serving the Greater Metro Area
+      </div>
+    </div>
+
+    <div class="contact-form" id="contactForm">
+      <div id="formFields">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" id="fname" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" id="lname" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="jane@example.com">
+        </div>
+        <div class="form-group">
+          <label>Phone (optional)</label>
+          <input type="tel" id="phone" placeholder="(555) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>I'm interested in…</label>
+          <select id="interest">
+            <option value="">Select one</option>
+            <option>Buying a home</option>
+            <option>Selling my property</option>
+            <option>Commercial space</option>
+            <option>Investment property</option>
+            <option>Just exploring</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="message" placeholder="Tell me a little about what you're looking for…"></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Send My Message</button>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <div class="check">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h4>Message Received!</h4>
+        <p>Thanks for reaching out. I'll be in touch within one business day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="logo">Haven<span>&</span>Home Realty</span>
+  <span>© 2026 · Licensed Real Estate Broker · All Rights Reserved</span>
+  <span><a href="#listings">Listings</a> · <a href="#about">About</a> · <a href="#contact">Contact</a></span>
+</footer>
+
+<script>
+  function filterCards(btn, type) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card').forEach(card => {
+      card.style.display = (type === 'all' || card.dataset.type === type) ? 'block' : 'none';
+    });
+  }
+
+  function submitForm() {
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const interest = document.getElementById('interest').value;
+    if (!fname || !email || !interest) {
+      alert('Please fill in your name, email, and area of interest.');
+      return;
+    }
+    document.getElementById('formFields').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
